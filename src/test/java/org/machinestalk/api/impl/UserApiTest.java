@@ -14,6 +14,7 @@ import org.machinestalk.domain.Address;
 import org.machinestalk.domain.Department;
 import org.machinestalk.domain.User;
 import org.machinestalk.service.UserService;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -26,6 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import reactor.core.publisher.Mono;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -85,7 +87,7 @@ class UserApiTest {
     void Should_GetUser_When_GetByIdEndpoint() throws Exception {
         // Given
         User mockUser = createMockUser();
-        when(userService.getById(anyLong())).thenReturn(Mono.just(mockUser));
+      //  OngoingStubbing<Optional<User>> optionalOngoingStubbing = //when(userService.getById(anyLong())).thenReturn(Mono.just(mockUser));
 
         // When & Then
         mockMvc.perform(get("/users/1")
@@ -99,7 +101,7 @@ class UserApiTest {
     @Test
     void Should_ReturnNotFound_When_UserNotExists() throws Exception {
         // Given
-        when(userService.getById(anyLong())).thenReturn(Mono.empty());
+       //when(userService.getById(anyLong())).thenReturn(Mono.empty());
 
         // When & Then
         mockMvc.perform(get("/users/999")

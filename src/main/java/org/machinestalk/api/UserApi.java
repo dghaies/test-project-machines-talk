@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import java.util.Optional;
 
-@RequestMapping(produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+@RequestMapping(value="/users", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
 public interface UserApi {
 
   /**
@@ -28,7 +28,7 @@ public interface UserApi {
    * @param userRegistrationDto DTO that input data needed to register a new user.
    * @return registered user infos.
    */
-  @PostMapping("/users/register")
+  @PostMapping("/")
   UserDto register(@RequestBody @NotNull @Valid UserRegistrationDto userRegistrationDto);
 
   /**
@@ -37,6 +37,6 @@ public interface UserApi {
    * @param userId user id
    * @return user infos
    */
-  @GetMapping("/users/{userId}")
-  Mono<UserDto> findUserById(@PathVariable("userId") long userId);
+  @GetMapping("/{userId}")
+  Optional<UserDto> findUserById(@PathVariable("userId") long userId);
 }

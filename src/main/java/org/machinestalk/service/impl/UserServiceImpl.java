@@ -14,7 +14,6 @@ import org.machinestalk.repository.UserRepository;
 import org.machinestalk.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -60,9 +59,9 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public Mono<User> getById(final long id) {
+  public Optional<User> getById(final long id) {
     Optional<User> user = userRepository.findById(id);
-    return user.map(Mono::just).orElse(Mono.empty());
+    return user;
   }
 
   private Address convertToAddress(AddressDto addressDto) {

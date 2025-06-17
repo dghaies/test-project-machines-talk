@@ -1,10 +1,10 @@
 package org.machinestalk.service;
 import org.machinestalk.api.dto.UserRegistrationDto;
 import org.machinestalk.domain.User;
-import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 
 public interface UserService {
 
@@ -22,5 +22,5 @@ public interface UserService {
    * @param id user id.
    * @return user entity.
    */
-  Mono<User> getById(long id);
+  Optional<User> getById(long id);
 }

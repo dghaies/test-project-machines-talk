@@ -14,9 +14,9 @@ import org.machinestalk.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -38,7 +38,7 @@ public class UserApiImpl implements UserApi {
     }
 
     @Override
-    public Mono<UserDto> findUserById(long userId) {
+    public Optional<UserDto> findUserById(long userId) {
         return userService.getById(userId)
                 .map(this::convertToUserDto);
     }
